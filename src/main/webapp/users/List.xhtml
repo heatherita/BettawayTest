@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -24,36 +25,38 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsersTitle_firstname}"/>
                             </f:facet>
-                            <h:outputText value="#{item.firstname}"/>
+
+
+                            <p:inplace id="first" editor="true">
+                                <p:inputText value="#{item.firstname}" required="true" label="text" />
+                            </p:inplace>
+
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsersTitle_lastname}"/>
                             </f:facet>
-                            <h:outputText value="#{item.lastname}"/>
-                        </h:column>
+                            <p:inplace id="last" editor="true">
+                                <p:inputText value="#{item.lastname}" required="true" label="text" />
+                            </p:inplace>
+                        </h:column>                        
+
                         <h:column>
-                            <f:facet name="header">
+                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsersTitle_dob}"/>
                             </f:facet>
-                            <h:outputText value="#{item.dob}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_userId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.userId}"/>
-                        </h:column>
+                            <p:inplace id="dob" editor="true">
+                                <p:outputLabel value="#{item.dob}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </p:outputLabel>  
+                                <p:calendar id="popup" value="#{item.dob}"/>       
+                            </p:inplace> 
+                        </h:column>     
+
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{usersController.prepareView}" value="#{bundle.ListUsersViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{usersController.prepareEdit}" value="#{bundle.ListUsersEditLink}"/>
-                            <h:outputText value=" "/>
+                            </f:facet>                           
                             <h:commandLink action="#{usersController.destroy}" value="#{bundle.ListUsersDestroyLink}"/>
                         </h:column>
                     </h:dataTable>
@@ -63,6 +66,15 @@
                 <br />
                 <br />
                 <h:link outcome="/index" value="#{bundle.ListUsersIndexLink}"/>
+
+                <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+                    <p:panelGrid id="display" columns="2" columnClasses="label,value">           
+                        <h:outputText value="Popup:" />
+                        <h:outputText value="#{item.dob}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:panelGrid>
+                </p:dialog>   
             </h:form>
         </ui:define>
     </ui:composition>
