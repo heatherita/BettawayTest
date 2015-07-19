@@ -15,6 +15,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
@@ -65,7 +66,9 @@ public class UsersController implements Serializable {
     }
 
     public String prepareList() {
-        recreateModel();
+        //recreateModel();
+        current = new Users();
+        selectedItemIndex = -1;
         return "List";
     }
 
@@ -108,7 +111,34 @@ public class UsersController implements Serializable {
             return null;
         }
     }
-
+    
+    
+    public void lastNameChanged(ValueChangeEvent event) {
+    String oldValue = (String)event.getOldValue();
+    String newValue = (String)event.getNewValue();
+    current = (Users) getItems().getRowData();
+    current.setLastname(newValue);
+    getFacade().edit(current);        
+}
+    
+    public void firstNameChanged(ValueChangeEvent event) {
+    String oldValue = (String)event.getOldValue();
+    String newValue = (String)event.getNewValue();
+    current = (Users) getItems().getRowData();
+    current.setFirstname(newValue);
+    getFacade().edit(current);        
+}
+    
+    
+    public void dobChanged(ValueChangeEvent event) {
+    Date oldValue = (Date)event.getOldValue();
+    Date newValue = (Date)event.getNewValue();
+    current = (Users) getItems().getRowData();
+    current.setDob(newValue);
+    getFacade().edit(current);        
+}
+    
+    
     public String destroy() {
         current = (Users) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();

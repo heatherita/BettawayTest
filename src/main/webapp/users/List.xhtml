@@ -11,92 +11,96 @@
             <h:outputText value="#{bundle.CreateUsersTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            
-            
+
+
             <p:accordionPanel multiple="true" activeIndex="0,1">
-        <p:tab title="Create User">
-             <h:form id="addForm">
-                <h:panelGrid columns="2">                    
-                    <h:outputLabel value="#{bundle.CreateUsersLabel_firstname}" for="firstname" />
-                    <h:inputText id="firstname" value="#{usersController.selected.firstname}" title="#{bundle.CreateUsersTitle_firstname}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_firstname}"/>                     
-                    <h:outputLabel value="#{bundle.CreateUsersLabel_lastname}" for="lastname" />
-                    <h:inputText id="lastname" value="#{usersController.selected.lastname}" title="#{bundle.CreateUsersTitle_lastname}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_lastname}"/>
-                    <h:outputLabel value="#{bundle.CreateUsersLabel_dob}" for="dob" />
-                    <h:inputText id="dob" value="#{usersController.selected.dob}" title="#{bundle.CreateUsersTitle_dob}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_dob}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>                                               
-                <h:commandLink action="#{usersController.create}" value="#{bundle.CreateUsersSaveLink}" />                
-                
-                </h:panelGrid>   
-                  </h:form>
-        </p:tab>
-    
-               
-            
-           <p:tab title="View Users"> 
-            <h:form styleClass="jsfcrud_list_form" id="listForm">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListUsersEmpty}" rendered="#{usersController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{usersController.items.rowCount > 0}">
-                    <h:outputText value="#{usersController.pagination.pageFirstItem + 1}..#{usersController.pagination.pageLastItem + 1}/#{usersController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{usersController.previous}" value="#{bundle.Previous} #{usersController.pagination.pageSize}" rendered="#{usersController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{usersController.next}" value="#{bundle.Next} #{usersController.pagination.pageSize}" rendered="#{usersController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{usersController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_firstname}"/>
-                            </f:facet>
+                <p:tab title="Create User">
+                    <h:form id="addForm">
+                        <h:panelGrid columns="2">                    
+                            <h:outputLabel value="#{bundle.CreateUsersLabel_firstname}" for="firstname" />
+                            <h:inputText id="firstname" value="#{usersController.selected.firstname}" title="#{bundle.CreateUsersTitle_firstname}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_firstname}"/>                     
+                            <h:outputLabel value="#{bundle.CreateUsersLabel_lastname}" for="lastname" />
+                            <h:inputText id="lastname" value="#{usersController.selected.lastname}" title="#{bundle.CreateUsersTitle_lastname}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_lastname}"/>                                                       
+                            <p:outputLabel for="popup2" value="DOB:" />
+                            <p:calendar id="popup2" value="#{usersController.selected.dob}"/> 
+                            <h:commandLink action="#{usersController.create}" value="#{bundle.CreateUsersSaveLink}" />                
 
-
-                            <p:inplace id="first" editor="true">
-                                <p:inputText value="#{item.firstname}" required="true" label="text" />
-                            </p:inplace>
-
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_lastname}"/>
-                            </f:facet>
-                            <p:inplace id="last" editor="true">
-                                <p:inputText value="#{item.lastname}" required="true" label="text" />
-                            </p:inplace>
-                        </h:column>                        
-
-                        <h:column>
-                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_dob}"/>
-                            </f:facet>
-                            <p:inplace id="dob" editor="true">
-                                <p:outputLabel value="#{item.dob}">
+                        </h:panelGrid>  
+                        <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+                            <p:panelGrid id="display" columns="2" columnClasses="label,value">           
+                                <h:outputText value="Popup:" />
+                                <h:outputText value="#{usersController.selected.dob}">
                                     <f:convertDateTime pattern="MM/dd/yyyy" />
-                                </p:outputLabel>  
-                                <p:calendar id="popup" value="#{item.dob}"/>       
-                            </p:inplace> 
-                        </h:column>     
+                                </h:outputText>
+                            </p:panelGrid>
+                        </p:dialog>
+                    </h:form>
+                </p:tab>
 
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>                           
-                            <h:commandLink action="#{usersController.destroy}" value="#{bundle.ListUsersDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>              
 
-                <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
-                    <p:panelGrid id="display" columns="2" columnClasses="label,value">           
-                        <h:outputText value="Popup:" />
-                        <h:outputText value="#{item.dob}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                    </p:panelGrid>
-                </p:dialog>
-                
-            </h:form>
-               </p:tab>
-                </p:accordionPanel>
+
+                <p:tab title="View Users"> 
+                    <h:form styleClass="jsfcrud_list_form" id="listForm">
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </h:panelGroup>
+                        <h:outputText escape="false" value="#{bundle.ListUsersEmpty}" rendered="#{usersController.items.rowCount == 0}"/>
+                        <h:panelGroup rendered="#{usersController.items.rowCount > 0}">
+                            <h:outputText value="#{usersController.pagination.pageFirstItem + 1}..#{usersController.pagination.pageLastItem + 1}/#{usersController.pagination.itemsCount}"/>&nbsp;
+                            <h:commandLink action="#{usersController.previous}" value="#{bundle.Previous} #{usersController.pagination.pageSize}" rendered="#{usersController.pagination.hasPreviousPage}"/>&nbsp;
+                            <h:commandLink action="#{usersController.next}" value="#{bundle.Next} #{usersController.pagination.pageSize}" rendered="#{usersController.pagination.hasNextPage}"/>&nbsp;
+                            <h:dataTable value="#{usersController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListUsersTitle_firstname}"/>
+                                    </f:facet>
+                                    <p:inplace id="first" editor="true">
+                                        <p:inputText value="#{item.firstname}" required="true" label="text" valueChangeListener="#{usersController.firstNameChanged}"/>
+                                    </p:inplace>
+
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListUsersTitle_lastname}"/>
+                                    </f:facet>
+                                    <p:inplace id="last" editor="true">                                                                                
+                                        <p:inputText value="#{item.lastname}" valueChangeListener="#{usersController.lastNameChanged}" required="true" label="text" />
+                                    </p:inplace>
+                                </h:column>                        
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListUsersTitle_dob}"/>
+                                    </f:facet>
+                                    <p:inplace id="dob" editor="true">
+                                        <p:outputLabel value="#{item.dob}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </p:outputLabel>  
+                                        <p:calendar id="popup" value="#{item.dob}" valueChangeListener="#{usersController.dobChanged}"/>       
+                                    </p:inplace> 
+                                </h:column>     
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="&nbsp;"/>
+                                    </f:facet>                           
+                                    <h:commandLink action="#{usersController.destroy}" value="#{bundle.ListUsersDestroyLink}"/>                                    
+                                </h:column>
+                            </h:dataTable>
+                        </h:panelGroup>              
+
+                        <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+                            <p:panelGrid id="display" columns="2" columnClasses="label,value">           
+                                <h:outputText value="Popup:" />
+                                <h:outputText value="#{item.dob}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:panelGrid>
+                        </p:dialog>
+
+                    </h:form>
+                </p:tab>
+            </p:accordionPanel>
         </ui:define>
     </ui:composition>
 
