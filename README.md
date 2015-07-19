@@ -9,9 +9,8 @@ Set up a MySQL db called bettaway.
 
 Import the file at src/main/webapp/resources/sql/createUsers.sql to create a users table.
 
-In weblogic, create datasource in Domain Structure (left panel) -> mydomain -> Services -> Data Sources.
+In weblogic console, create datasource in Domain Structure (left panel) -> mydomain -> Services -> Data Sources.
 1) Name it “jdbc/bettaway” and the jndi name must also be “jdbc/bettaway”.
-Domain Structure (left panel) -> mydomain -> Services -> Data Sources.
 2) Fill out the details that pertain to your configuration.
 3) Make sure that you check “myserver” (or whatever your server name is) in targets tab to deploy to proper domain. 
 
