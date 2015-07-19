@@ -5,15 +5,15 @@ by Heather Propes
 
 **Install**
 
-Set up a MySQL db called bettaway
+Set up a MySQL db called bettaway.
 
-Import the file at src/main/webapp/resources/sql/createUsers.sql to create a users table
+Import the file at src/main/webapp/resources/sql/createUsers.sql to create a users table.
 
 In weblogic, create datasource 
-	* Name it “jdbc/bettaway” and the jndi name must also be “jdbc/bettaway”.
-	* Domain Structure (left panel) -> mydomain -> Services -> Data Sources
-	* Fill out the details that pertain to your configuration
-	* Make sure that you check “myserver” in targets tab to deploy to proper domain 
+1) Name it “jdbc/bettaway” and the jndi name must also be “jdbc/bettaway”.
+2) Domain Structure (left panel) -> mydomain -> Services -> Data Sources.
+3) Fill out the details that pertain to your configuration.
+4) Make sure that you check “myserver” in targets tab to deploy to proper domain. 
 
 In weblogic, deploy BettawayWebapp-1.0-SNAPSHOT.war as a web application (I’m guessing you know how to do this).
 
