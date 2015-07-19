@@ -3,17 +3,17 @@ Coding test for Bettaway Logistics Programmer Analyst Position
 by Heather Propes
 
 
-Install
+**Install**
 
 Set up a MySQL db called bettaway
 
 Import the file at src/main/webapp/resources/sql/createUsers.sql to create a users table
 
 In weblogic, create datasource 
-	*Name it “jdbc/bettaway” and the jndi name must also be “jdbc/bettaway”.
-	*Domain Structure (left panel) -> mydomain -> Services -> Data Sources
-	*Fill out the details that pertain to your configuration
-	*Make sure that you check “myserver” in targets tab to deploy to proper domain 
+	* Name it “jdbc/bettaway” and the jndi name must also be “jdbc/bettaway”.
+	* Domain Structure (left panel) -> mydomain -> Services -> Data Sources
+	* Fill out the details that pertain to your configuration
+	* Make sure that you check “myserver” in targets tab to deploy to proper domain 
 
 In weblogic, deploy BettawayWebapp-1.0-SNAPSHOT.war as a web application (I’m guessing you know how to do this).
 
@@ -22,7 +22,7 @@ Verify that web application and datasource are both showing “OK” in weblogic
 Now go to http://localhost:7001/BettawayWebapp/ and try the Bettaway At-Home Test Web Application.
 
 
-To-Do
+**To-Do**
 
 System runs out of memory after about 10 builds. Is this because of my badly underpowered VM, or a memory leak? Use Weblogic to diagnose. 
 
