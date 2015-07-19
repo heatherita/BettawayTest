@@ -11,7 +11,27 @@
             <h:outputText value="#{bundle.ListUsersTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
+            
+            <h:form id="addForm">
+                <h:panelGrid columns="2">
+                    
+                    <h:outputLabel value="#{bundle.CreateUsersLabel_firstname}" for="firstname" />
+                    <h:inputText id="firstname" value="#{usersController.selected.firstname}" title="#{bundle.CreateUsersTitle_firstname}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_firstname}"/>                     
+                    <h:outputLabel value="#{bundle.CreateUsersLabel_lastname}" for="lastname" />
+                    <h:inputText id="lastname" value="#{usersController.selected.lastname}" title="#{bundle.CreateUsersTitle_lastname}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_lastname}"/>
+                    <h:outputLabel value="#{bundle.CreateUsersLabel_dob}" for="dob" />
+                    <h:inputText id="dob" value="#{usersController.selected.dob}" title="#{bundle.CreateUsersTitle_dob}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_dob}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateUsersLabel_userId}" for="userId" />
+                    <h:inputText id="userId" value="#{usersController.selected.userId}" title="#{bundle.CreateUsersTitle_userId}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_userId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{usersController.create}" value="#{bundle.CreateUsersSaveLink}" />                
+            </h:form>
+            
+            
+            <h:form styleClass="jsfcrud_list_form" id="listForm">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
