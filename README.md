@@ -20,7 +20,8 @@ Verify that web application and datasource are both showing “OK” in weblogic
 
 Now go to http://localhost:7001/BettawayWebapp/ in a browser and try Heather Propes's Bettaway At-Home Test Web Application.
 
-Now hire Heather Propes. She's a hard worker!
+Contact Heather if anything breaks or if you have questions.
+
 
 **To-Do**
 
